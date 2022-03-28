@@ -1,0 +1,203 @@
+<app-header></app-header>
+<div class="SidenavBar">
+    <ul>
+
+        <li [routerLinkActive]="['active']" class="active">
+            <a [routerLink]="['/order']">
+                <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                <p>Orders Management</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/menu']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span> 
+                <p>Menu Management</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/product-management']">
+                <span><i class="fa fa-area-chart" aria-hidden="true"></i></span> 
+                <p>Products Management</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/offer-management']">
+                <span><i class="fa fa-tags" aria-hidden="true"></i></span> 
+                <p>Offer  Management</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/commision-managementt']">
+                <span><i class="fa fa-percent" aria-hidden="true"></i></span> 
+                <p>Commission Management </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/notification']">
+                <span><i class="fa fa-bell-o" aria-hidden="true"></i></span> 
+                <p>Notifications </p>
+            </a>
+        </li>
+
+       
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/terms-&-condition']">
+                <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 
+                <p>Terms & conditions</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/business-owner-profile']">
+                <span><i class="fa fa-suitcase" aria-hidden="true"></i></span> 
+                <p>Business Owner Profile</p>
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <h4 class="Title">Current Orders Detailed</h4>
+
+            <div class="HelpContent">
+                <div class="DetailsArea">
+                    <div class="DetailsProfile">
+                        <figure><img src="assets/images/profile.jpg"></figure>
+                    </div>
+                    <ul>
+                        <li>
+                            <span>Order Id</span>
+                        </li>
+    
+                        <li>
+                            <span>Date and Time of Order</span>
+                        </li>
+    
+                        <li>
+                            <span>Customer Name </span>
+                        </li>
+    
+                        <li>
+                            <span>Customer Phone Number </span>
+                        </li>
+    
+                        <li>
+                            <span>Customer Email id  </span>
+                        </li>
+    
+                        <li>
+                            <span>Price  </span>
+                        </li>
+    
+                        <li>
+                            <span>Offered Price (If Applicable)   </span>
+                        </li>
+    
+                        <li>
+                            <span>Delivery Charges   </span>
+                        </li>
+    
+                        <li>
+                            <span>Total Price   </span>
+                        </li>
+    
+                        <li>
+                            <span>Payment Amount </span>
+                        </li>
+    
+                        <li>
+                            <span>Mode of Payment </span>
+                        </li>
+    
+                        <li>
+                            <span>Status </span>
+                        </li>
+    
+                        <li>
+                            <span>Delivery Address  </span>
+                        </li>
+                       
+                        <li>
+                            <span>Request for Delivery </span>
+                        </li>
+                        
+                        <li>
+                            <span>Delivery Schedule (In case of Grocery) </span>
+                            <ul>
+                                <li><span>Date of the Delivery  </span>  </li>
+                                <li><span>Morning | Afternoon  </span>   </li>
+                                <li><span>Selected Timing Slot  </span>  </li>
+                            </ul>
+                        </li>
+                       
+                        <li>
+                            <span>Delivery Details </span>
+                            <ul>
+                                <li><span>Name of the delivery boy</span>  </li>
+                                <li><span>Contact No. of the delivery boy</span>   </li>
+                                <li><span>Contact Number </span>  </li>
+                                <li><span>Expected Delivery time  </span>  </li>
+                                <li><span>Delivery status</span>   </li>
+                                <li><span>Start Date</span>   </li>
+                                <li><span>Description  </span> </li>
+                            </ul>
+                        </li>
+                       
+                    </ul>
+                </div>
+            </div>
+
+
+            <h4 class="Title" style="margin-top: 30px;">Order Details</h4>
+            <div class="TableList">
+                <div class="mainTable ">
+                    <table class="table  table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Name Of The Item</th> 
+                                <th>Quantity Of Item </th>  
+                                <th>Price of Item</th> 
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>China</td>  
+                                <td>Veg</td>  
+                                <td>321</td>  
+                            </tr>    
+                            
+                            <tr>
+                                <td>1</td>
+                                <td>China</td>  
+                                <td>Veg</td>  
+                                <td>456</td>  
+                            </tr> 
+
+                            <tr>
+                                <td>1</td>
+                                <td>China</td>  
+                                <td>Veg</td>  
+                                <td>123</td>  
+                            </tr> 
+        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+</div>

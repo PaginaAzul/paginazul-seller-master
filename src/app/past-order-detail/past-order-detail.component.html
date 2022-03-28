@@ -1,0 +1,191 @@
+<app-header></app-header>
+<div class="SidenavBar">
+    <ul>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/order']">
+                <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                <p>Gestão de Pedidos</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Restaurant'">
+            <a [routerLink]="['/menu']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <p>Gestão do Menu</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/product-management']">
+                <span><i class="fa fa-area-chart" aria-hidden="true"></i></span>
+                <p>Gestão de Produtos</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/offer-management']">
+                <span><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <p>Gestão das Promoções</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/commision-management']">
+                <span><i class="fa fa-percent" aria-hidden="true"></i></span>
+                <p>Gestão de Comissão </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/slot']">
+                <span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                <p>Gestão de Slot </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Restaurant'">
+            <a [routerLink]="['/cuisine']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <p>Gestão de Cozinha </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/category']">
+                <span><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+                <p>Gerenciamento das Categorias </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/notification']">
+                <span><i class="fa fa-bell-o" aria-hidden="true"></i></span>
+                <p>Notificações </p>
+            </a>
+        </li>
+
+
+        <li [routerLinkActive]="['active']">
+            <a (click)="open('http://3.129.47.202/privacyPt.html')">
+                <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                <p>Termos e Condições</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/business-owner-profile']">
+                <span><i class="fa fa-suitcase" aria-hidden="true"></i></span>
+                <p>Perfil do Comerciante</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <h4 class="Title">Detalhes de pedidos</h4>
+
+            <div class="HelpContent">
+                <div class="DetailsArea">
+                    <div class="DetailsProfile">
+                        <figure><img src="{{userData?.profilePic}}"></figure>
+                    </div>
+
+
+                    <ul>
+                        <li>
+                            <span>Número do Pedido</span> {{detail?.orderNumber}}
+                        </li>
+    
+                        <li>
+                            <span>Data de entrega</span> {{detail?.deliveryDate}}
+                        </li>
+    
+                        <li>
+                            <span>Nome do usuário </span>  {{userData?.name}}
+                        </li>
+    
+                        <li>
+                            <span>Usuário móvel </span> {{userData?.mobileNumber}}
+                        </li>
+    
+                        <li>
+                            <span>Email do usuário</span> {{userData?.email}}
+                        </li>
+    
+                        <li>
+                            <span>Preço total  </span> {{detail?.price}}
+                        </li>
+    
+                        <li>
+                            <span>Preço oferecido (se aplicável)   </span> {{detail?.offerApplicable}}
+                        </li>
+    
+                        <li>
+                            <span>Taxas de serviços </span> {{detail?.deliveryCharge}}
+                        </li>
+    
+                        <li>
+                            <span>Desconto de oferta aplicada (no caso de sua oferta aplicada)   </span> {{detail?.offerAmount}}
+                        </li>
+    
+                        <li>
+                            <span>Valor de Pagamento </span> {{detail?.totalPrice}}
+                        </li>
+    
+                        <li>
+                            <span>Modo de pagamento </span> Cash
+                        </li>
+    
+                        <li>
+                            <span>Status </span> {{detail?.status}}
+                        </li>
+    
+                        <li>
+                            <span>Endereço de entrega  </span> {{detail?.address}}
+                        </li>
+
+                        <li>
+                            <span>Marco  </span> {{detail?.landmark}}
+                        </li>
+
+                        <li>
+                            <span>Edifício e separado.  </span> {{detail?.buildingAndApart}}
+                        </li>
+
+                        <li *ngIf="detail?.orderType=='Store'">
+                            <span>Slot de entrega</span> {{detail?.buildingAndApart}}
+                        </li>
+
+                        <li *ngIf="detail?.orderType=='Store'">
+                            <span>Tempo de entrega</span> {{detail?.buildingAndApart}}
+                        </li>
+                       
+                        <li >
+                            <span>Detalhes do produto </span>
+                            <ul *ngFor="let item of productList">
+                                <li><span>Nome</span>{{item?.name}}</li>
+                                <li><span>Quantidade</span>{{item?.quantity}}</li>
+                            </ul>
+                        </li>
+                        
+                        <li *ngIf="detail?.driverAssign==true">
+                            <span>Detalhes do entregador </span>
+                            <ul>
+                                <li><span>Nome</span> {{driverDetail?.name}} </li>
+                                <li><span>Contato</span> {{driverDetail?.mobileNumber}}  </li>
+                                <li><span>O email</span> {{driverDetail?.email}} </li>
+                            </ul>
+                        </li>
+                       
+                    </ul>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>

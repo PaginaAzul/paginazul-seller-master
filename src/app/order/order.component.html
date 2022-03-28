@@ -1,0 +1,279 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <div class="enterKey">
+                <h4 class="Title">Gestão de Pedidos</h4>
+
+                <div class="SearchBox">
+
+                </div>
+            </div>
+
+            <div class="Filter">
+                <form [formGroup]="searchForm">
+                    <div class="Filter">
+                        <div class="form-group">
+                            <label>Pesquisa</label>
+                            <input type="text" formControlName="search" class="form-control" placeholder="Pesquisa"
+                                style="font-size: 8px;">
+                        </div>
+                        <div class="form-group">
+                            <label>Da data</label>
+                            <input type="date" class="form-control" formControlName="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Até a presente data</label>
+                            <input type="date" class="form-control" formControlName="endDate">
+                        </div>
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button class="Button" (click)="search(searchForm.value)">Aplique</button>
+                            <button class="Button" style="margin-left: 5px;" (click)="getViewData()">Redefinir</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="HelpArea">
+
+                <ul class="nav nav-tabs boxs" id="myTab" role="tablist">
+                    <li class="nav-item ">
+                        <a class="nav-link active" id="Current-tab" data-toggle="tab" href="#Current" role="tab"
+                            aria-controls="Current" aria-selected="true" (click)="getType('Current')">Pedidos Atuais</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="Past-tab" data-toggle="tab" href="#Past" role="tab" aria-controls="Past"
+                            aria-selected="false" (click)="getType('Past')">Pedidos Anteriores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="Reject-tab" data-toggle="tab" href="#Reject" role="tab"
+                            aria-controls="Reject" aria-selected="false" (click)="getType('Reject')">Rejeitar Pedidos</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+
+                    <div class="tab-pane fade show active" id="Current" role="tabpanel" aria-labelledby="Current-tab">
+                        <div class="HelpContent">
+                            <div class="TableList">
+                                <div class="mainTable ">
+                                    <table class="table  table-bordered ">
+                                        <thead>
+                                            <tr>
+                                                <th>S. Nº</th>
+                                                <th>Número do Pedido</th>
+                                                <th>Data de entrega</th>
+                                                <th>Nome do usuário</th>
+                                                <th>Usuário móvel</th>
+                                                <th>Email do usuário</th>
+                                                <th>Preço total </th>
+                                                <th>Modo de pagamento</th>
+                                                <th>Status </th>
+                                                <th>Data de criação</th>
+                                                <th>Açao </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr
+                                                *ngFor='let x of recordArray | paginate: { itemsPerPage: limit, currentPage: pageNumber , totalItems: total };let i=index'>
+                                                <td>{{(i+1) + srNumber }}</td>
+                                                <td>{{x?.orderNumber}}</td>
+                                                <td>{{x?.deliveryDate}}</td>
+                                                <td>{{x.userId?.name}}</td>
+                                                <td>{{x.userId?.mobileNumber}}</td>
+                                                <td>{{x.userId?.email}}</td>
+                                                <td>{{x?.totalPrice}} Kz</td>
+                                                <td>Cash</td>
+                                                <td>{{x?.status}}</td>
+                                                <td title="{{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}">
+                                                    {{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}</td>
+
+                                                <td>
+                                                    <a class="Blue" [routerLink]="['/past-order-detail/'+x?._id]"><i
+                                                            class="fa fa-eye"></i></a>
+
+                                                    <a class="Red" style="color:white"
+                                                        (click)="blockApi('Reject',x?._id)"
+                                                        data-target="modal" title="Reject"><i class="fa fa-times"
+                                                            style="color: red;cursor: pointer;"></i></a>
+                                                    <a class="Green" (click)="blockApi('Confirmed',x?._id)"
+                                                        *ngIf="x?.status=='Pending'" data-target="modal"
+                                                        title="Confirmed"><i class="fa fa-check"
+                                                            style="color: green;cursor: pointer;"></i></a>
+                                                    <a class="Green" (click)="blockApi('In process',x?._id)"
+                                                        *ngIf="x?.status=='Accept'" data-target="modal"
+                                                        title="In process"><i class="fa fa-cutlery"
+                                                            style="color: green;cursor: pointer;"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf="recordArray == ''">
+                                                <td colspan="12" vertical-align="middle">
+                                                    <div class="no-record">
+                                                        <div class="no-recordin">
+                                                            <H5 style="margin-left: -8%;">Nenhum Registro Encontrado</H5>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                   
+                                </div>
+                                <div *ngIf="recordArray != ''" class="pull-right mt-4">
+                                    <pagination-controls (pageChange)="pagination($event)"></pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="Past" role="tabpanel" aria-labelledby="Past-tab">
+                        <div class="HelpContent">
+                            <div class="TableList">
+                                <div class="mainTable ">
+                                    <table class="table  table-bordered ">
+                                        <thead>
+                                            <tr>
+                                                <th>S. Nº</th>
+                                                <th>Número do Pedido</th>
+                                                <th>Data de entrega</th>
+                                                <th>Nome do usuário</th>
+                                                <th>Usuário móvel</th>
+                                                <th>Email do usuário</th>
+                                                <th>Preço total </th>
+                                                <th>Modo de pagamento</th>
+                                                <th>Status </th>
+                                                <th>Data de criação</th>
+                                                <th>Açao </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr
+                                                *ngFor='let x of recordArray | paginate: { itemsPerPage: limit, currentPage: pageNumber , totalItems: total };let i=index'>
+                                                <td>{{(i+1) + srNumber }}</td>
+                                                <td>{{x?.orderNumber}}</td>
+                                                <td>{{x?.deliveryDate}}</td>
+                                                <td>{{x.userId?.name}}</td>
+                                                <td>{{x.userId?.mobileNumber}}</td>
+                                                <td>{{x.userId?.email}}</td>
+                                                <td>{{x?.totalPrice}} Kz</td>
+                                                <td>Cash</td>
+                                                <td>{{x?.status}}</td>
+                                                <td title="{{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}">
+                                                    {{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}</td>
+
+                                                <td>
+                                                    <a class="Blue" [routerLink]="['/past-order-detail/'+x?._id]"><i
+                                                            class="fa fa-eye"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf="recordArray == ''">
+                                                <td colspan="12" vertical-align="middle">
+                                                    <div class="no-record">
+                                                        <div class="no-recordin">
+                                                            <H5 style="margin-left: -8%;">Nenhum Registro Encontrado</H5>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                   
+                                </div>
+                                <div *ngIf="recordArray != ''" class="pull-right mt-4">
+                                    <pagination-controls (pageChange)="pagination($event)"></pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="Reject" role="tabpanel" aria-labelledby="Reject-tab">
+                        <div class="HelpContent">
+                            <div class="TableList">
+                                <div class="mainTable ">
+                                    <table class="table  table-bordered ">
+                                        <thead>
+                                            <tr>
+                                                <th>S. Nº</th>
+                                                <th>Número do Pedido</th>
+                                                <th>Data de entrega</th>
+                                                <th>Nome do usuário</th>
+                                                <th>Usuário móvel</th>
+                                                <th>Email do usuário</th>
+                                                <th>Preço total </th>
+                                                <th>Modo de pagamento</th>
+                                                <th>Status </th>
+                                                <th>Data de criação</th>
+                                                <th>Açao </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                *ngFor='let x of recordArray | paginate: { itemsPerPage: limit, currentPage: pageNumber , totalItems: total };let i=index'>
+                                                <td>{{(i+1) + srNumber }}</td>
+                                                <td>{{x?.orderNumber}}</td>
+                                                <td>{{x?.deliveryDate}}</td>
+                                                <td>{{x.userId?.name}}</td>
+                                                <td>{{x.userId?.mobileNumber}}</td>
+                                                <td>{{x.userId?.email}}</td>
+                                                <td>{{x?.totalPrice}} Kz</td>
+                                                <td>Cash</td>
+                                                <td>{{x?.status}}</td>
+                                                <td title="{{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}">
+                                                    {{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}</td>
+
+                                                <td>
+                                                    <a class="Blue" [routerLink]="['/past-order-detail/'+x?._id]"><i
+                                                            class="fa fa-eye"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf="recordArray == ''">
+                                                <td colspan="12" vertical-align="middle">
+                                                    <div class="no-record">
+                                                        <div class="no-recordin">
+                                                            <H5 style="margin-left: -8%;">Nenhum Registro Encontrado</H5>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                   
+                                </div>
+                                <div *ngIf="recordArray != ''" class="pull-right mt-4">
+                                    <pagination-controls (pageChange)="pagination($event)"></pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div id="DeleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="Decline">
+                        <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                        <h3>Reject</h3>
+                        <p>Are you sure you want to Reject ?</p>
+                        <h4>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">no</a>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">Yes</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

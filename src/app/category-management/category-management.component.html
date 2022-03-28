@@ -1,0 +1,194 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <div class="enterKey">
+                <h4 class="Title">Gerenciamento das Categorias</h4>
+                <div class="SearchBox">
+                    <form action="" [formGroup]="searchForm">
+                        <input type="text" formControlName="search" class="form-control" placeholder="Pesquisa">
+                        <button style="margin-left: 5px;" (click)="search(searchForm.value)">Aplique</button>
+                        <button class="ButtonReset" (click)="getViewData()">Redefinir</button>
+                        <button class="ButtonReset" data-toggle="modal"
+                        data-target="#toggless">Adicionar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="TableList">
+                <div class="mainTable ">
+                    <table class="table  table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>S. Nº</th>
+                                <th>Imagem</th>
+                                <th>Categoria</th>
+                                <th>Status</th>
+                                <th>Açao</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr
+                                *ngFor='let x of recordArray | paginate: { itemsPerPage: limit, currentPage: pageNumber , totalItems: total };let i=index'>
+                                <td>{{(i+1) + srNumber }}</td>
+                                <td><img src="{{x?.image}}" alt="" class="imgWidth"></td>
+                                <td>{{x?.name}}</td>
+                                <td *ngIf="x?.status=='Active'" style="color:green" title="Active">Active</td>
+                                <td *ngIf="x?.status=='Inactive'" style="color:red" title="Inactive">Inactive</td>
+                                <td *ngIf="x?.status!='Active' && x?.status!='Inactive'"></td>
+
+                                <td>
+                                    <a class="Green" (click)="toggles(x)" data-toggle="modal"
+                                        data-target="#toggles"><i class="fa fa-pencil"></i></a>
+                                    <a class="Red" style="color:white" (click)="blockApi('Inactive',x?._id)"
+                                        *ngIf="x?.status=='Active'" data-target="modal" title="Inactive"><i
+                                            class="fa fa-ban" style="color: red;cursor: pointer;"></i></a>
+                                    <a class="Green" (click)="blockApi('Active',x?._id)" *ngIf="x?.status=='Inactive'"
+                                        data-target="modal" title="Active"><i class="fa fa-check"
+                                            style="color: green;cursor: pointer;"></i></a>
+                                            <a class="Blue" [routerLink]="['/subcategory/'+x?._id]"><i
+                                                class="fa fa-eye"></i></a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="recordArray == ''">
+                                <td colspan="12" vertical-align="middle">
+                                    <div class="no-record">
+                                        <div class="no-recordin">
+                                            <H5 style="margin-left: 1%;">Nenhum Registro Encontrado</H5>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="recordArray != ''" class="pull-right mt-4">
+                        <pagination-controls (pageChange)="pagination($event)"></pagination-controls>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div id="DeleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="Decline">
+                        <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                        <h3>Excluir</h3>
+                        <p>Tem certeza de que deseja excluir ?</p>
+                        <h4>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">não</a>
+                            <a href="JavaScript:Void(0);" (click)="deleteApi()" data-dismiss="modal">sim</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="ModalBox">
+    <div id="toggles" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                    <div class="PasswordArea">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form [formGroup]="editCuisinForm">
+
+                                    <div class="form-group">
+                                        <label>Imagem</label>
+                                        <input #fileUploader1 type="file" id=fileUploader1
+                                        (change)="selectImages($event)">
+                                        <div>
+                                            <img src="{{activeImage}}" *ngIf="activeImage" style="height: 70px;
+                                            width: 79px;
+                                            margin-left: 133px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input type="text" class="form-control" formControlName="name">
+                                        <div class="text-danger"
+                                            *ngIf="editCuisinForm.get('name').hasError('required') && (formvalidation.submitted || editCuisinForm.get('name').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                   
+                                    <button type="submit" (click)="editCuisine()"
+                                        class="Button apply_btn">Editar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div id="toggless" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal" (click)="cancelModal()">&times;</a>
+                    <div class="PasswordArea">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form [formGroup]="addCuisinForm">
+                                    <div class="">
+                                        <div class="holdrpc">
+
+                                        </div>
+                                        <div class="card-block dashmainbusin">
+                                            <div>
+                                                <img src="{{activeImage}}" *ngIf="activeImage" style="height: 70px;
+                                                width: 79px;
+                                                margin-left: 133px;">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Imagem</label>
+                                                <input #fileUploader type="file" id=fileUploader
+                                                    (change)="selectImages($event)">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Nome</label>
+                                                <input type="text" id="text-input" 
+                                                    placeholder="Nome" class="form-control"
+                                                    formControlName="name">
+                                                <div class="text-danger"
+                                                    *ngIf="addCuisinForm.get('name').hasError('required') && (formvalidation.submitted || addCuisinForm.get('name').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                            </div>
+
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bdr-bts">
+                                        <button type="button" class="btn btn-primary btn-sm" (click)="addCuisine()"
+                                            style="cursor: pointer;">
+                                            <i class="fa fa-dot-circle-o"></i> Adicionar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,247 @@
+<app-header></app-header>
+
+<div class="SidenavBar">
+    <ul>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/order']">
+                <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                <p>Gestão de Pedidos</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Restaurant'">
+            <a [routerLink]="['/menu']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <p>Gestão do Menu</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/product-management']">
+                <span><i class="fa fa-area-chart" aria-hidden="true"></i></span>
+                <p>Gestão de Produtos</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/offer-management']">
+                <span><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <p>Gestão das Promoções</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/commision-management']">
+                <span><i class="fa fa-percent" aria-hidden="true"></i></span>
+                <p>Gestão de Comissão</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/slot']">
+                <span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                <p>Gestão de Slot</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Restaurant'">
+            <a [routerLink]="['/cuisine']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <p>Gestão de Cozinha</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/category']">
+                <span><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+                <p>Gerenciamento das Categorias</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/notification']">
+                <span><i class="fa fa-bell-o" aria-hidden="true"></i></span>
+                <p>Notificações</p>
+            </a>
+        </li>
+
+
+        <li [routerLinkActive]="['active']">
+            <a (click)="open('http://3.129.47.202/privacy.html')">
+                <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                <p>Termos e Condições</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/business-owner-profile']">
+                <span><i class="fa fa-suitcase" aria-hidden="true"></i></span>
+                <p>Perfil do Comerciante</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <h4 class="Title">Editar Perfil</h4>
+
+
+            <form [formGroup]="editForm">
+                <div class="">
+                    <div class="holdrpc">
+
+                    </div>
+                    <div class="card-block dashmainbusin">
+                        <div>
+                            <img src="{{activeImage}}" *ngIf="activeImage" style="height: 70px;
+                            width: 79px;
+                            margin-left: 340px">
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Restaurante | Imagem da loja</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input #fileUploader type="file" id=fileUploader (change)="selectImages($event)">
+
+                            </div>
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Nome do restaurante | Nome da Loja</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" placeholder="Nome do restaurante | Nome da Loja"
+                                    class="form-control" formControlName="name">
+                                <div class="text-danger"
+                                    *ngIf="editForm.get('name').hasError('required') && (formvalidation.submitted || editForm.get('name').dirty)">
+                                    *Campo é obrigatório
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Descrição</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <textarea type="text" placeholder="Descrição" class="form-control"
+                                    formControlName="description" rows="2"></textarea>
+
+                                <div class="text-danger"
+                                    *ngIf="editForm.get('description').hasError('required') && (formvalidation.submitted || editForm.get('description').dirty)">
+                                    *Campo é obrigatório
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Endereço</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" placeholder="Endereço" class="form-control"
+                                    formControlName="address" id="sourcePlace" (focus)="focusFunction('sourcePlace')">
+                                <div class="text-danger"
+                                    *ngIf="editForm.get('address').hasError('required') && (formvalidation.submitted || editForm.get('address').dirty)">
+                                    *Campo é obrigatório
+                                </div>
+                            </div>
+                        </div>
+                        <div id="map" hidden></div>
+
+
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Valor mínimo do pedido </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" placeholder="Valor mínimo do pedido" class="form-control"
+                                    formControlName="minimumValue">
+                                <div class="text-danger"
+                                    *ngIf="editForm.get('minimumValue').hasError('required') && (formvalidation.submitted || editForm.get('minimumValue').dirty)">
+                                    *Campo é obrigatório
+                                </div>
+                                <div class="text-danger"
+                                *ngIf="editForm.get('deliveryTime').hasError('pattern') && (formvalidation.submitted || editForm.get('deliveryTime').dirty)">
+                                *Only number allowed
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Horário de abertura </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" placeholder="Horário de abertura" class="form-control"
+                                    formControlName="openingTime">
+                                <div class="text-danger"
+                                    *ngIf="editForm.get('openingTime').hasError('required') && (formvalidation.submitted || editForm.get('openingTime').dirty)">
+                                    *Campo é obrigatório
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Horário de encerramento </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" placeholder="Horário de encerramento" class="form-control"
+                                    formControlName="closingTime">
+                                <div class="text-danger"
+                                    *ngIf="editForm.get('closingTime').hasError('required') && (formvalidation.submitted || editForm.get('closingTime').dirty)">
+                                    *Campo é obrigatório
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Tempo de entrega (minutos) </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" placeholder="Tempo de entrega (minutos)" class="form-control"
+                                    formControlName="deliveryTime">
+                                <div class="text-danger"
+                                    *ngIf="editForm.get('deliveryTime').hasError('required') && (formvalidation.submitted || editForm.get('deliveryTime').dirty)">
+                                    *Campo é obrigatório
+                                </div>
+                                <div class="text-danger"
+                                    *ngIf="editForm.get('deliveryTime').hasError('pattern') && (formvalidation.submitted || editForm.get('deliveryTime').dirty)">
+                                    *Only number allowed
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group" *ngIf="storeType=='Restaurant'">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Cozinhas </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" placeholder="Cozinhas" class="form-control"
+                                    formControlName="cuisine">
+                                <div class="text-danger"
+                                    *ngIf="editForm.get('cuisine').hasError('required') && (formvalidation.submitted || editForm.get('cuisine').dirty)">
+                                    *Campo é obrigatório
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bdr-bts">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="editApi()" style="cursor: pointer;">
+                        <i class="fa fa-dot-circle-o"></i> Enviar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

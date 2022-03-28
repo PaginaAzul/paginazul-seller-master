@@ -1,0 +1,66 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+
+            <div class="PasswordArea">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <form [formGroup]="changePasswordForm" #f="ngForm">
+                            <h4 class="Title">Mudar senha</h4>
+                            <div class="form-group">
+                                <label class="control-labe">Senha Antiga</label>
+                                <input class="form-control" formControlName="oldPassword" title="Old Password"
+                                    autocomplete="false" type="password" placeholder="Senha Antiga">
+                                <span class="text-danger"
+                                    *ngIf="changePasswordForm.get('oldPassword').hasError('minlength') && (changePasswordForm.get('oldPassword').dirty || f.submitted)">
+                                    Old password is too short.</span>
+                                <span class="text-danger"
+                                    *ngIf="changePasswordForm.get('oldPassword').hasError('maxlength') && (changePasswordForm.get('oldPassword').dirty || f.submitted)">Length
+                                    exceeded.</span>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-labe">New Password</label>
+                                <input class="form-control" formControlName="newPassword" title="New Password"
+                                    autocomplete="false" type="password" placeholder="Enter new password">
+                                <span class="text-danger"
+                                    *ngIf="changePasswordForm.get('newPassword').hasError('minlength') && (changePasswordForm.get('newPassword').dirty || f.submitted)">New
+                                    Password is too short.</span>
+                                <span class="text-danger"
+                                    *ngIf="changePasswordForm.get('newPassword').hasError('maxlength') && (changePasswordForm.get('newPassword').dirty || f.submitted)">Length
+                                    Exceeded.</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-labe">Confirm Password</label>
+                                <input class="form-control" formControlName="confirmPassword" title="Confirm Password"
+                                    autocomplete="false" type="password" placeholder="Enter confirm password">
+                                <span class="text-danger"
+                                    *ngIf="(changePasswordForm.value.newPassword != changePasswordForm.value.confirmPassword) && (changePasswordForm.get('confirmPassword').dirty || f.submitted)">Must
+                                    match with new password.</span>
+                            </div>
+                            <button type="button" (click)="editProfile(changePasswordForm.value)">Submit</button>
+                        </form>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div>
+                            <h4 class="Title">
+                                <span>Notifications</span>
+
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </h4>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

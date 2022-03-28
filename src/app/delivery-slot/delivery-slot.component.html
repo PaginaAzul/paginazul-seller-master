@@ -1,0 +1,240 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <div class="enterKey">
+                <h4 class="Title">Gestão de Slot</h4>
+
+                <div class="SearchBox">
+                    <form action="" [formGroup]="searchForm">
+                        <input type="text" formControlName="search" class="form-control" placeholder="Pesquisa">
+                        <button style="margin-left: 5px;" (click)="search(searchForm.value)">Aplique</button>
+                        <button class="ButtonReset" (click)="getViewData()">Redefinir</button>
+                        <button class="ButtonReset" data-toggle="modal" data-target="#toggles">Adicionar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="TableList">
+                <div class="mainTable ">
+                    <table class="table  table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>S. Nº</th>
+                                <th>Dia</th>
+                                <th>Slot</th>
+                                <th>Horário de abertura</th>
+                                <th>Horário de encerramento</th>
+                                <th>Status</th>
+                                <th>Açao</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr
+                                *ngFor='let x of recordArray | paginate: { itemsPerPage: limit, currentPage: pageNumber , totalItems: total };let i=index'>
+                                <td>{{(i+1) + srNumber }}</td>
+                                <td>{{x?.day}}</td>
+                                <td>{{x?.timeSlot}}</td>
+                                <td>{{x?.openTime}}</td>
+                                <td>{{x?.closeTime}}</td>
+                                <td *ngIf="x?.status=='Active'" style="color:green" title="Active">Active</td>
+                                <td *ngIf="x?.status=='Inactive'" style="color:red" title="Inactive">Inactive</td>
+                                <td *ngIf="x?.status!='Active' && x?.status!='Inactive'"></td>
+
+                                <td>
+                                    <a class="Green" (click)="toggless(x)" data-toggle="modal"
+                                        data-target="#toggless"><i class="fa fa-pencil"></i></a>
+                                    <a class="Red" href="JavaScript:Void(0);" (click)="DeleteModal(x?._id)"
+                                        data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></a>
+                                    <a class="Red" style="color:white" (click)="blockApi('Inactive',x?._id)"
+                                        *ngIf="x?.status=='Active'" data-target="modal" title="Inactive"><i
+                                            class="fa fa-ban" style="color: red;cursor: pointer;"></i></a>
+                                    <a class="Green" (click)="blockApi('Active',x?._id)" *ngIf="x?.status=='Inactive'"
+                                        data-target="modal" title="Active"><i class="fa fa-check"
+                                            style="color: green;cursor: pointer;"></i></a>
+                                </td>
+
+                            </tr>
+                            <tr *ngIf="recordArray == ''">
+                                <td colspan="9" vertical-align="middle">
+                                    <div class="no-record">
+                                        <div class="no-recordin">
+                                            <H5 style="margin-left: -4%;">Nenhum Registro Encontrado</H5>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="recordArray != ''" class="pull-right mt-4">
+                        <pagination-controls (pageChange)="pagination($event)"></pagination-controls>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div id="DeleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="Decline">
+                        <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                        <h3>Excluir</h3>
+                        <p>Tem certeza de que deseja excluir ?</p>
+                        <h4>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">não</a>
+                            <a href="JavaScript:Void(0);" (click)="deleteApi()" data-dismiss="modal">sim</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="ModalBox">
+    <div id="toggles" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                    <div class="PasswordArea">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form [formGroup]="addSlotForm">
+                                    <div class="form-group">
+                                        <label>Selecione o dia</label>
+                                        <select class="form-control" formControlName="day">
+                                            <option value="">Selecione o dia</option>
+                                            <option *ngFor="let y of dayData" value="{{y}}">
+                                                {{y}}
+                                            </option>
+                                        </select>
+                                        <div class="text-danger"
+                                            *ngIf="addSlotForm.get('day').hasError('required') && (formvalidation.submitted || addSlotForm.get('day').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Selecionar slot</label>
+                                        <select class="form-control" formControlName="timeSlot">
+                                            <option value="">Selecionar slot</option>
+                                            <option *ngFor="let y of slotData" value="{{y}}">
+                                                {{y}}
+                                            </option>
+                                        </select>
+                                        <div class="text-danger"
+                                            *ngIf="addSlotForm.get('timeSlot').hasError('required') && (formvalidation.submitted || addSlotForm.get('timeSlot').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Horário de abertura</label>
+                                        <input type="text" name="" class="form-control" placeholder="10:00 AM"
+                                            formControlName="openTime">
+                                        <div class="text-danger"
+                                            *ngIf="addSlotForm.get('openTime').hasError('required') && (formvalidation.submitted || addSlotForm.get('openTime').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Horário de encerramento</label>
+                                        <input type="text" name="" class="form-control" placeholder="10:00 PM"
+                                            formControlName="closeTime">
+                                        <div class="text-danger"
+                                            *ngIf="addSlotForm.get('closeTime').hasError('required') && (formvalidation.submitted || addSlotForm.get('closeTime').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" (click)="addSlot(addSlotForm.value)"
+                                        class="Button apply_btn">Confirme</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div id="toggless" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                    <div class="PasswordArea">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form [formGroup]="editSlotForm">
+                                    <div class="form-group">
+                                        <label>Selecione o dia</label>
+                                        <select class="form-control" formControlName="day">
+                                            <option value="">Selecione o dia</option>
+                                            <option *ngFor="let y of dayData" value="{{y}}">
+                                                {{y}}
+                                            </option>
+                                        </select>
+                                        <div class="text-danger"
+                                            *ngIf="editSlotForm.get('day').hasError('required') && (formvalidation.submitted || editSlotForm.get('day').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Selecionar slot</label>
+                                        <select class="form-control" formControlName="timeSlot">
+                                            <option value="">Selecionar slot</option>
+                                            <option *ngFor="let y of slotData" value="{{y}}">
+                                                {{y}}
+                                            </option>
+                                        </select>
+                                        <div class="text-danger"
+                                            *ngIf="editSlotForm.get('timeSlot').hasError('required') && (formvalidation.submitted || editSlotForm.get('timeSlot').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Horário de abertura</label>
+                                        <input type="text" name="" class="form-control" placeholder="10:00 AM"
+                                            formControlName="openTime">
+                                        <div class="text-danger"
+                                            *ngIf="editSlotForm.get('openTime').hasError('required') && (formvalidation.submitted || editSlotForm.get('openTime').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Horário de encerramento</label>
+                                        <input type="text" name="" class="form-control" placeholder="10:00 PM"
+                                            formControlName="closeTime">
+                                        <div class="text-danger"
+                                            *ngIf="editSlotForm.get('closeTime').hasError('required') && (formvalidation.submitted || editSlotForm.get('closeTime').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" (click)="editSlot(editSlotForm.value)"
+                                        class="Button apply_btn">Confirme</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

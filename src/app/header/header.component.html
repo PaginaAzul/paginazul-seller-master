@@ -1,0 +1,45 @@
+<div class="Header">
+    <div class="Logo">
+        <img src="assets/images/Logotipo Paginazul Vertical.png">
+    </div>
+    <div class="Navigation">
+        <div class="header-notifications">
+          
+        </div>
+
+        <div class="Avater">
+            <a href="javascript:void(0);">
+                <figure><img src="{{profilePic}}"></figure> {{name}} </a>
+            <ul>
+                <li>
+                    <figure><img src="{{profilePic}}"></figure>
+                    <h4> {{name}} <span>Administrator</span></h4>
+                </li>
+                <li><a href="JavaScript:Void(0);" data-toggle="modal" data-target="#Logout"><span><i class="fa fa-sign-out"></i></span> Sair</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+
+<div class="ModalBox">
+    <div id="Logout" class="modal fade" role="dialog">
+        <div class="modal-dialog"> 
+            <div class="modal-content"> 
+                <div class="modal-body"> 
+                    <div class="Decline">
+                        <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>                       
+                        <h3>Sair</h3>
+                        <p>Tem certeza que deseja sair ?</p>
+                        <h4>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">não</a>
+                            <a (click)="logout()" style="cursor: pointer;" data-dismiss="modal">sim</a>
+                        </h4>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>  
+</div>

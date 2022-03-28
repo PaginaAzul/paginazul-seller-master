@@ -1,0 +1,52 @@
+
+@font-face {
+    font-family: "PoppinsBold";
+    src: url("/assets/fonts/PoppinsBold.ttf") format("ttf"), 
+        url("/assets/fonts/PoppinsBold.eot") format("eot"),
+        url("/assets/fonts/PoppinsBold.woff") format("woff"),
+        url("/assets/fonts/PoppinsBold.woff2") format("woff2"),
+        url("/assets/fonts/PoppinsBold.otf") format("otf");
+}
+@font-face {
+    font-family: "PoppinsMedium";
+    src: url("/assets/fonts/PoppinsMedium.ttf") format("ttf"), 
+        url("/assets/fonts/PoppinsMedium.eot") format("eot"),
+        url("/assets/fonts/PoppinsMedium.woff") format("woff"),
+        url("/assets/fonts/PoppinsMedium.woff2") format("woff2"),
+        url("/assets/fonts/PoppinsMedium.otf") format("otf");
+}
+
+@font-face {
+    font-family: "PoppinsRegular";
+    src: url("/assets/fonts/PoppinsRegular.ttf") format("ttf"), 
+        url("/assets/fonts/PoppinsRegular.eot") format("eot"),
+        url("/assets/fonts/PoppinsRegular.woff") format("woff"),
+        url("/assets/fonts/PoppinsRegular.woff2") format("woff2"),
+        url("/assets/fonts/PoppinsRegular.otf") format("otf");
+}
+
+@font-face {
+    font-family: "PoppinsSemiBold";
+    src: url("/assets/fonts/PoppinsSemiBold.ttf") format("ttf"), 
+        url("/assets/fonts/PoppinsSemiBold.eot") format("eot"),
+        url("/assets/fonts/PoppinsSemiBold.woff") format("woff"),
+        url("/assets/fonts/PoppinsSemiBold.woff2") format("woff2"),
+        url("/assets/fonts/PoppinsSemiBold.otf") format("otf");
+}
+
+@font-face{
+    font-family: "PoppinsLight";
+    src: url("/assets/fonts/PoppinsLight.ttf") format("ttf"), 
+        url("/assets/fonts/PoppinsLight.eot") format("eot"),
+        url("/assets/fonts/PoppinsLight.woff") format("woff"),
+        url("/assets/fonts/PoppinsLight.woff2") format("woff2"),
+        url("/assets/fonts/PoppinsLight.otf") format("otf");
+}
+
+
+// Variables for fonts familiy
+$PoppinsBold: 'PoppinsBold';
+$PoppinsMedium: 'PoppinsMedium';
+$PoppinsRegular: 'PoppinsRegular';
+$PoppinsSemiBold: 'PoppinsSemiBold';
+$PoppinsLight: 'PoppinsLight';

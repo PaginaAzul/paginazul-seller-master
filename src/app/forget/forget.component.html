@@ -1,0 +1,27 @@
+<div class="LoginArea" style="background-image: url('images/pattern.png');">
+    <div class="LoginBox">
+        <figure>
+            <div class="logoMainImg">
+                <img src="https://res.cloudinary.com/a2karya80559188/image/upload/v1623234096/Logotipo_Paginazul_Vertical_xvkhtx.png" style="object-fit: fill;"></div>
+        </figure>
+        <h5>Email Recuperado</h5>
+        <h6>Para se manter conectado conosco, faça o login.</h6>
+        <form [formGroup]="forgotPasswordMain">
+            <div class="form-group">
+                <label>O email</label>
+                <input type="email" placeholder="O email" class="form-control" formControlName="email">
+                <span class="Icon"><i class="fa fa-envelope"></i></span>
+                <div class="text-danger"
+                    *ngIf="forgotPasswordMain.get('email').hasError('required') && (forgotPasswordMain.get('email').dirty)">
+                    *E-mail é obrigatório
+                </div>
+                <div class="text-danger"
+                    *ngIf="forgotPasswordMain.get('email').hasError('pattern') && (forgotPasswordMain.get('email').dirty)">
+                    E-mail inválido.
+                </div>
+            </div>
+            <a class="Login" (click)="forgotFunction(forgotPasswordMain.value)" style="cursor: pointer;">Enviar</a>
+            <button style="margin-top: 5px;" [routerLink]="['/']">Entrar <i class="fa fa-sign-in"></i></button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <h4 class="Title">Adicionar Menu</h4>
+            <form [formGroup]="addMenuForm">
+                <div class="">
+                    <div class="holdrpc">
+                    </div>
+
+                    <div class="card-block dashmainbusin">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Imagem do Produto</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input #fileUploader type="file" id=fileUploader (change)="selectImages($event)">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Nome do item </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" name="en_name" placeholder="Nome do item"
+                                    class="form-control" formControlName="productName">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="addMenuForm.get('productName').hasError('required') && (formvalidation.submitted || addMenuForm.get('productName').dirty)">
+                                *Campo é obrigatório
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Selecione veg / não veg</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <select class="form-control" formControlName="productType">
+                                    <option value="">Selecione a Categoria</option>
+                                    <option *ngFor="let y of categoryData" value="{{y}}">
+                                        {{y}}
+                                    </option>
+                                </select>
+                                <div class="text-danger"
+                                    *ngIf="addMenuForm.get('productType').hasError('required') && (formvalidation.submitted || addMenuForm.get('productType').dirty)">
+                                    *Campo é obrigatório
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Tipo de sabor (salgado / doce / misto) </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" name="en_name"
+                                    class="form-control" formControlName="tasteType">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="addMenuForm.get('tasteType').hasError('required') && (formvalidation.submitted || addMenuForm.get('tasteType').dirty)">
+                                *Campo é obrigatório
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Tipo de alimentação (café da manhã / almoço / jantar) </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" name="en_name"
+                                    class="form-control" formControlName="eatType">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="addMenuForm.get('eatType').hasError('required') && (formvalidation.submitted || addMenuForm.get('eatType').dirty)">
+                                *Campo é obrigatório
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Quantidade</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" name="en_name" placeholder="Quantidade"
+                                    class="form-control" formControlName="quantity">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="addMenuForm.get('quantity').hasError('required') && (formvalidation.submitted || addMenuForm.get('quantity').dirty)">
+                                *Campo é obrigatório
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="addMenuForm.get('quantity').hasError('pattern') && (formvalidation.submitted || addMenuForm.get('quantity').dirty)">
+                                *Somente número
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Medição</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" name="en_name" placeholder="Medição"
+                                    class="form-control" formControlName="measurement">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="addMenuForm.get('measurement').hasError('required') && (formvalidation.submitted || addMenuForm.get('measurement').dirty)">
+                                *Campo é obrigatório
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Descrição</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" name="en_name" placeholder="Descrição"
+                                    class="form-control" formControlName="description">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="addMenuForm.get('description').hasError('required') && (formvalidation.submitted || addMenuForm.get('description').dirty)">
+                                *Campo é obrigatório
+                            </div>
+                        </div>
+
+
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Preço do item</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="price" placeholder="Preço do item" class="form-control"
+                                    formControlName="price">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="addMenuForm.get('price').hasError('required') && (formvalidation.submitted || addMenuForm.get('price').dirty)">
+                                *Campo é obrigatório
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="addMenuForm.get('price').hasError('pattern') && (formvalidation.submitted || addMenuForm.get('price').dirty)">
+                                *Somente número
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Cozinha</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <div class="slecopt">
+                                    <select class="form-control" formControlName="cuisine">
+                                        <option value="">Cozinha</option>
+                                        <option *ngFor="let y of cuisines" value="{{y}}">
+                                            {{y}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger"
+                                        *ngIf="addMenuForm.get('cuisine').hasError('required') && (formvalidation.submitted || addMenuForm.get('cuisine').dirty)">
+                                        *Campo é obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bdr-bts">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="addItem()" style="cursor: pointer;">
+                        <i class="fa fa-dot-circle-o"></i> Enviar
+                    </button>
+                    <a href="javascript:void(0)" (click)="backClicked()" style="cursor: pointer;"
+                        class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

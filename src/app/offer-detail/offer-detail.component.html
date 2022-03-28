@@ -1,0 +1,159 @@
+<app-header></app-header>
+<div class="SidenavBar">
+    <ul>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/order']">
+                <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                <p>Orders Management</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/menu']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span> 
+                <p>Menu Management</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/product-management']">
+                <span><i class="fa fa-area-chart" aria-hidden="true"></i></span> 
+                <p>Products Management</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" class="active">
+            <a [routerLink]="['/offer-management']">
+                <span><i class="fa fa-tags" aria-hidden="true"></i></span> 
+                <p>Offer  Management</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/commision-managementt']">
+                <span><i class="fa fa-percent" aria-hidden="true"></i></span> 
+                <p>Commission Management </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/notification']">
+                <span><i class="fa fa-bell-o" aria-hidden="true"></i></span> 
+                <p>Notifications </p>
+            </a>
+        </li>
+
+       
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/terms-&-condition']">
+                <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> 
+                <p>Terms & conditions</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/business-owner-profile']">
+                <span><i class="fa fa-suitcase" aria-hidden="true"></i></span> 
+                <p>Business Owner Profile</p>
+            </a>
+        </li>
+
+        
+
+    </ul>
+</div>
+
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <h4 class="Title">Add Offer</h4>
+
+            
+
+            <form >
+                <div class="">
+                    <div class="holdrpc">
+
+                    </div>
+                    <div class="card-block dashmainbusin">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Name of the restaurant | Store </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" name="en_name" placeholder="Enter restaurant name"
+                                    class="form-control" required="">
+                            </div>
+                        </div>
+
+
+                        
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Category and Sub-category </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <div class="slecopt">
+                                    <select name="category_id" required="" class="form-control">
+                                        <option value="">Select Category</option>
+                                        <option value="2">Veg</option>
+                                        <option value="3">Non-Veg</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Item of offer </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="text-input" name="en_name" placeholder="Enter Item of offer"
+                                    class="form-control" required="">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class="form-control-label">Price </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="price" placeholder="Enter Price" class="form-control" required="">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Discounted Price</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="price" placeholder="Discounted Price" class="form-control" required="">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Description </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="price" placeholder="Description " class="form-control" required="">
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+                <div class="card-footer bdr-bts">
+                    <button type="button" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <a href="javascript:void(0)" onclick="window.history.back()" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

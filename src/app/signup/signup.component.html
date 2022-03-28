@@ -1,0 +1,128 @@
+<div class="LoginArea" style="background-image: url('images/pattern.png');">
+    <div class="LoginBox LoginBox12">
+        <figure>
+            <div class="logoMainImg">
+                <img src="https://res.cloudinary.com/a2karya80559188/image/upload/v1623234096/Logotipo_Paginazul_Vertical_xvkhtx.png" style="object-fit: fill;">
+            </div>
+        </figure>
+        <h5>Vamos começar vendedor</h5>
+        <h6>Para se manter conectado conosco, cadastre-se.</h6>
+        <form [formGroup]="signupForm">
+
+            <div class="form-group">
+                <label>Nome do restaurante | Nome da Loja</label>
+                <input type="text" placeholder="Nome do restaurante | Nome da Loja" class="form-control"
+                    formControlName="name">
+                <div class="text-danger"
+                    *ngIf="signupForm.get('name').hasError('required') && (formvalidation.submitted || signupForm.get('name').dirty)">
+                    *Campo é obrigatório
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Endereço </label>
+                <input type="text" placeholder="Endereço" class="form-control" formControlName="address"
+                    id="sourcePlace" (focus)="focusFunction('sourcePlace')">
+                <div class="text-danger"
+                    *ngIf="signupForm.get('address').hasError('required') && (formvalidation.submitted || signupForm.get('address').dirty)">
+                    *Campo é obrigatório
+                </div>
+            </div>
+            <div id="map" hidden></div>
+
+            <div class="form-group">
+                <label>O email</label>
+                <input type="text" placeholder="O email" class="form-control" formControlName="email">
+                <div class="text-danger"
+                    *ngIf="signupForm.get('email').hasError('required') && (formvalidation.submitted || signupForm.get('email').dirty)">
+                    *Campo é obrigatório
+                </div>
+                <div class="text-danger"
+                    *ngIf="signupForm.get('email').hasError('pattern') && (signupForm.get('email').dirty)">
+                    Invalid email
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Número de telefone</label>
+                <input type="text" placeholder="Número de telefone" class="form-control" formControlName="mobileNumber">
+                <div class="text-danger"
+                    *ngIf="signupForm.get('mobileNumber').hasError('required') && (formvalidation.submitted || signupForm.get('mobileNumber').dirty)">
+                    *Campo é obrigatório
+                </div>
+                <div class="text-danger"
+                    *ngIf="signupForm.get('mobileNumber').hasError('pattern') && (formvalidation.submitted || signupForm.get('mobileNumber').dirty)">
+                    *Somente número
+                </div>
+                <div class="text-danger"
+                    *ngIf="signupForm.get('mobileNumber').hasError('minlength') && (signupForm.get('mobileNumber').dirty)">
+                    O comprimento mínimo deve ser 6.
+                </div>
+                <div class="text-danger"
+                    *ngIf="signupForm.get('mobileNumber').hasError('maxlength') && (signupForm.get('mobileNumber').dirty)">
+                    O comprimento máximo deve ser inferior a 17.
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label>Mercearia | Restaurante </label>
+                <select class="form-control" formControlName="storeType">
+                    <option value="">Tipo de loja</option>
+                    <option *ngFor="let y of categoryData" value="{{y.english}}">
+                        {{y.port}}
+                    </option>
+                </select>
+                <div class="text-danger"
+                    *ngIf="signupForm.get('storeType').hasError('required') && (formvalidation.submitted || signupForm.get('storeType').dirty)">
+                    *Campo é obrigatório
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Senha </label>
+                <input type="password" placeholder="Senha" class="form-control" formControlName="password">
+                <div class="text-danger"
+                    *ngIf="signupForm.get('password').hasError('required') && (formvalidation.submitted || signupForm.get('password').dirty)">
+                    *Campo é obrigatório
+                </div>
+                <div class="text-danger"
+                    *ngIf="signupForm.get('password').hasError('minlength') && (signupForm.get('password').dirty)">
+                    O comprimento mínimo deve ser 6.
+                </div>
+                <div class="text-danger"
+                    *ngIf="signupForm.get('password').hasError('maxlength') && (signupForm.get('password').dirty)">
+                    O comprimento máximo deve ser inferior a 17.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Confirme a Senha </label>
+                <input type="password" placeholder="Confirme a Senha" class="form-control"
+                    formControlName="confirmPassword">
+                <div class="text-danger"
+                    *ngIf="(signupForm.value.password != signupForm.value.confirmPassword) && (signupForm.get('confirmPassword').dirty)">
+                    Deve corresponder à nova senha.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Imagem de restaurante / loja</label>
+                <input #fileUploader type="file" id=fileUploader accept="image/jpg,image/png, image/jpeg"
+                    (change)="selectImages($event)">
+            </div>
+            <div class="form-group">
+                <label>Documento de Verificação</label>
+                <input #fileUploader1 type="file" id=fileUploader1 (change)="selectImages1($event)">
+            </div>
+            <div class="Checkboxs">
+                <label class="CheckBox"><a href="javaScript:void(0)"
+                        (click)="open('http://3.129.47.202/privacy.html')">Aceito os Termos e Condições</a>
+                    <input type="checkbox" (change)="toggleVisibility($event)">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+            <a class="Login" (click)="signupSubmit()" style="cursor: pointer;">Inscrever-se <i class="fa fa-sign-in"></i></a>
+            <a class="Login" [routerLink]="['/']" style="cursor: pointer;margin-top: 5px;"> Entrar <i
+                    class="fa fa-sign-in"></i></a>
+        </form>
+    </div>
+</div>

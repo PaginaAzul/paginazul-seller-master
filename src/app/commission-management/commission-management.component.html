@@ -1,0 +1,80 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <div class="enterKey">
+                <h4 class="Title">Gestão de Comissão</h4>
+
+                <!-- <div class="SearchBox">
+                    <form action="" [formGroup]="searchForm">
+                        <input type="text" formControlName="search" class="form-control" placeholder="Pesquisa">
+                        <button style="margin-left: 5px;" (click)="search(searchForm.value)">Aplique</button>
+                        <button class="ButtonReset" (click)="getViewData()">Redefinir</button>
+                    </form>
+                </div> -->
+            </div>
+
+            <div class="TableList">
+                <div class="dragscroll">
+                    <table id="example" class="table  table-bordered" cellpadding="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>S. Nº</th>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Comissão(%)</th>
+                                <th>Taxa de entrega</th>
+                                <th>Data de criação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor='let x of recordArray | paginate: { itemsPerPage: limit, currentPage: pageNumber , totalItems: total };let i=index'>
+                                <td>{{(i+1) + srNumber }}</td>
+                                <td><img src="{{x.resAndStoreId?.image}}" alt="" class="imgWidth"></td>
+                                <td>{{x.resAndStoreId?.name}}</td>
+                                <td>{{x?.commission}}</td>
+                                <td>{{x?.deliveryCharge}}</td>
+                                <td title="{{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}">
+                                    {{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}</td>
+                            </tr>
+                            <tr *ngIf="recordArray == ''">
+                                <td colspan="9" vertical-align="middle">
+                                    <div class="no-record">
+                                        <div class="no-recordin">
+                                            <H5 style="margin-left: -5%;">Nenhum Registro Encontrado</H5>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="recordArray != ''" class="pull-right mt-4">
+                        <pagination-controls (pageChange)="pagination($event)"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div id="DeleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="Decline">
+                        <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                        <h3>Delete</h3>
+                        <p>Are you sure you want to delete this Parking venue ?</p>
+                        <h4>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">no</a>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">Yes</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="SidenavBar">
+    <ul>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/order']">
+                <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                <p>Gestão de Pedidos</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Restaurant'">
+            <a [routerLink]="['/menu']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <p>Gestão do Menu</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/product-management']">
+                <span><i class="fa fa-area-chart" aria-hidden="true"></i></span>
+                <p>Gestão de Produtos</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/offer-management']">
+                <span><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <p>Gestão das Promoções</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/commision-management']">
+                <span><i class="fa fa-percent" aria-hidden="true"></i></span>
+                <p>Gestão de Comissão </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/slot']">
+                <span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                <p>Gestão de Slot </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Restaurant'">
+            <a [routerLink]="['/cuisine']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <p>Gestão de Cozinha </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/category']">
+                <span><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+                <p>Gerenciamento das Categorias </p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/notification']">
+                <span><i class="fa fa-bell-o" aria-hidden="true"></i></span>
+                <p>Notificações </p>
+            </a>
+        </li>
+
+
+        <li [routerLinkActive]="['active']">
+            <a (click)="open('http://3.129.47.202/privacyPt.html')">
+                <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                <p>Termos e Condições</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/business-owner-profile']">
+                <span><i class="fa fa-suitcase" aria-hidden="true"></i></span>
+                <p>Perfil do Comerciante</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+
+
+<div class="ModalBox">
+    <div id="Logout" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="Decline">
+                        <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                        <h3>Logout</h3>
+                        <p>Are you sure you want to Logout ?</p>
+                        <h4>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">no</a>
+                            <a [routerLink]="['/']" data-dismiss="modal">Yes</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

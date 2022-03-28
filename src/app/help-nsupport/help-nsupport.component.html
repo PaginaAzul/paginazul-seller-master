@@ -1,0 +1,303 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <div class="enterKey">
+                <h4 class="Title">Support Management</h4>
+                <div class="Filter">
+                    <div class="form-group">
+                        <label>Select tickets</label>
+                        <select class="form-control"> 
+                            <option>Select tickets</option>
+                            <option>Pending tickets </option>
+                            <option>In progress </option>
+                            <option>Resolved tickets </option> 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label id="empy-label">&nbsp;</label>
+                        <button class="Button apply_btn">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="TableList">
+                <div class="dragscroll">
+                    <table id="example" class="table table-bordered " cellpadding="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Query ID</th>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email id </th>
+                                <th>Phone Number</th>
+                                <th>Selected Reason </th>
+                                <th>Message </th>
+                                <th>Status </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>wLauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Pending</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                             
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Resolved</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>progress</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Resolved</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Pending</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Progress</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Resolved </td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Pending</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Progress</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Pending</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Pending</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Progress</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Pending</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Pending</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>USER 9575</td>
+                                <td>Lauren </td>
+                                <td>lauren@gmail.com</td>
+                                <td>+91 9876543210</td>
+                                <td>Selected Reason </td>
+                                <td>Message</td>
+                                <td>Progress</td>
+                                <td>
+                                    <div class=" SearchBox2">
+                                        <a [routerLink]="['/support-revert']">Revert</a>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- <div class="Pagination">
+                <ul>
+                    <li><a href="javaScript:void(0)">Previous</a></li>
+                    <li class="active"><a href="javaScript:void(0)">1</a></li>
+                    <li><a href="javaScript:void(0)">2</a></li>
+                    <li><a href="javaScript:void(0)">3</a></li>
+                    <li><a href="javaScript:void(0)">Next</a></li>
+                </ul>
+            </div> -->
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="LoginArea" style="background-image: url('images/pattern.png');">
+  <div class="LoginBox">
+    <figure>
+      <div class="logoMainImg">
+        <img src="https://res.cloudinary.com/a2karya80559188/image/upload/v1623234096/Logotipo_Paginazul_Vertical_xvkhtx.png" style="object-fit: fill;">
+      </div>
+    </figure>
+    <h5>Vamos começar vendedor</h5>
+    <h6>Para se manter conectado conosco, cadastre-se.</h6>
+    <form [formGroup]="LoginForm">
+
+      <div class="form-group">
+        <label>O email</label>
+        <input type="email" class="form-control" formControlName="email" placeholder="O email" />
+        <span class="Icon"><i class="fa fa-envelope"></i></span>
+        <div class="text-danger" *ngIf="LoginForm.get('email').hasError('required') && (LoginForm.get('email').dirty)">
+          *E-mail é obrigatório
+        </div>
+        <div class="text-danger" *ngIf="LoginForm.get('email').hasError('pattern') && (LoginForm.get('email').dirty)">
+          E-mail inválido.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Senha </label>
+        <input type="password" class="form-control" formControlName="password" placeholder="Senha">
+        <div class="text-danger"
+          *ngIf="LoginForm.get('password').hasError('required') && (LoginForm.get('password').dirty)">
+          *Senha requerida
+        </div>
+        <div class="text-danger"
+          *ngIf="LoginForm.get('password').hasError('minlength') && (LoginForm.get('password').dirty)">
+          O comprimento mínimo deve ser 6.
+        </div>
+        <div class="text-danger"
+          *ngIf="LoginForm.get('password').hasError('maxlength') && (LoginForm.get('password').dirty)">
+          O comprimento máximo deve ser inferior a 17.
+        </div>
+        <span class="Icon"><i class="fa fa-unlock-alt"></i></span>
+      </div>
+
+      <div class="Checkboxs" style="font-size: 15px;">
+        <a style="color: blue;" [routerLink]="['/forgot-password']"><u>Esqueceu a senha??</u></a>
+        <label><input type="checkbox" formControlName="remberMe" title="Lembre de mim"> Lembre de mim</label>
+      </div>
+      <button (click)="loginFunction(LoginForm.value)">Entrar<i class="fa fa-sign-in"></i></button>
+      <button [routerLink]="['/sign-up']" style="margin-top: 5px;">Inscrever-se<i class="fa fa-user-plus"></i></button>
+    </form>
+  </div>
+</div>

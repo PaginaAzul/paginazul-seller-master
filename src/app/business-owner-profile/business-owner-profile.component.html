@@ -1,0 +1,419 @@
+<app-header></app-header>
+<div class="SidenavBar">
+    <ul>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/order']">
+                <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                <p>Gestão de Pedidos</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Restaurant'">
+            <a [routerLink]="['/menu']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <p>Gestão do Menu</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/product-management']">
+                <span><i class="fa fa-area-chart" aria-hidden="true"></i></span>
+                <p>Gestão de Produtos</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/offer-management']">
+                <span><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <p>Gestão das Promoções</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/commision-management']">
+                <span><i class="fa fa-percent" aria-hidden="true"></i></span>
+                <p>Gestão de Comissão</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/slot']">
+                <span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                <p>Gestão de Slot</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Restaurant'">
+            <a [routerLink]="['/cuisine']">
+                <span><i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <p>Gestão de Cozinha</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']" *ngIf="storeType=='Grocery Store'">
+            <a [routerLink]="['/category']">
+                <span><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+                <p>Gerenciamento das Categorias</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/notification']">
+                <span><i class="fa fa-bell-o" aria-hidden="true"></i></span>
+                <p>Notificações</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a (click)="open('http://3.129.47.202/privacyPt.html')">
+                <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                <p>Termos e Condições</p>
+            </a>
+        </li>
+
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/business-owner-profile']">
+                <span><i class="fa fa-suitcase" aria-hidden="true"></i></span>
+                <p>Perfil do Comerciante</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <div class="enterKey">
+                <h4 class="Title">Gestão do Comerciante</h4>
+
+            </div>
+
+            <div class="HelpArea">
+
+                <ul class="nav nav-tabs boxs" id="myTab" role="tablist">
+                    <li class="nav-item ">
+                        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="true">Meu perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="Settings-tab" data-toggle="tab" href="#Settings" role="tab"
+                            aria-controls="Settings" aria-selected="false">Configurações</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="earnings-tab" data-toggle="tab" href="#earnings" role="tab"
+                            aria-controls="earnings" aria-selected="false">Meus ganhos</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="HelpContent">
+                            <div class="TableList">
+                                <div class="mainTable ">
+                                    <table class="table table-striped table-bordered ">
+                                        <thead>
+                                            <tr>
+                                                <th>S. Nº</th>
+                                                <th>Perfil</th>
+                                                <th>Nome do restaurante | Nome da Loja</th>
+                                                <th>Descrição</th>
+                                                <th>Endereço</th>
+                                                <th>Valor mínimo do pedido</th>
+                                                <th>Horário de abertura</th>
+                                                <th>Horário de encerramento</th>
+                                                <th>Tempo de entrega</th>
+                                                <th>Açao</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td><img src={{sellerRecord?.image}} alt="" class="imgWidth"></td>
+                                                <td>{{sellerRecord?.name}}</td>
+                                                <td>{{sellerRecord?.description}}</td>
+                                                <td>{{sellerRecord?.address}}</td>
+                                                <td>{{sellerRecord?.minimumValue}} Kz</td>
+                                                <td>{{sellerRecord?.openingTime}}</td>
+                                                <td>{{sellerRecord?.closingTime}}</td>
+                                                <td>{{sellerRecord?.deliveryTime}} Min.</td>
+                                                <td>
+                                                    <a class="Green" [routerLink]="['/edit-profile']"><i
+                                                            class="fa fa-pencil"></i></a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="Settings" role="tabpanel" aria-labelledby="Settings-tab">
+                        <div class="HelpContent">
+                            <div class="PasswordArea">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="col-sm-7">
+                                            <form [formGroup]="changePasswordForm">
+                                                <h4 class="Title">Mudar senha</h4>
+                                                <div class="form-group">
+                                                    <label class="control-labe">Senha Antiga</label>
+                                                    <input class="form-control" formControlName="oldPassword"
+                                                        title="Old Password" autocomplete="false" type="password"
+                                                        placeholder="Senha Antiga">
+                                                    <div class="text-danger"
+                                                        *ngIf="changePasswordForm.get('oldPassword').hasError('minlength') && (changePasswordForm.get('oldPassword').dirty)">
+                                                        O comprimento mínimo deve ser 6.
+                                                    </div>
+                                                    <div class="text-danger"
+                                                        *ngIf="changePasswordForm.get('oldPassword').hasError('maxlength') && (changePasswordForm.get('oldPassword').dirty)">
+                                                        O comprimento máximo deve ser inferior a 17.
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-labe">Nova senha</label>
+                                                    <input class="form-control" formControlName="newPassword"
+                                                     autocomplete="false" type="password"
+                                                        placeholder="Nova senha">
+                                                        <div class="text-danger"
+                                                        *ngIf="changePasswordForm.get('newPassword').hasError('minlength') && (changePasswordForm.get('newPassword').dirty)">
+                                                        O comprimento mínimo deve ser 6.
+                                                    </div>
+                                                    <div class="text-danger"
+                                                        *ngIf="changePasswordForm.get('newPassword').hasError('maxlength') && (changePasswordForm.get('newPassword').dirty)">
+                                                        O comprimento máximo deve ser inferior a 17.
+                                                    </div>
+
+                                                   
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-labe">Confirme a Senha</label>
+                                                    <input class="form-control" formControlName="confirmPassword"
+                                                         autocomplete="false" type="password"
+                                                        placeholder="Confirme a Senha">
+                                                    <span class="text-danger"
+                                                        *ngIf="(changePasswordForm.value.newPassword != changePasswordForm.value.confirmPassword) && (changePasswordForm.get('confirmPassword').dirty)">Must
+                                                        Deve corresponder à nova senha.</span>
+                                                </div>
+                                                <div class="card-footer bdr-bts">
+                                                    <button type="button" class="btn btn-primary btn-sm"
+                                                        (click)="editProfile(changePasswordForm.value)"
+                                                        style="cursor: pointer;">
+                                                        <i class="fa fa-dot-circle-o"></i> Enviar
+                                                    </button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <form>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="earnings" role="tabpanel" aria-labelledby="earnings-tab">
+                        <div class="HelpContent">
+                            <div class="Small-Wrapper">
+                                <div class="enterKey">
+                                    <h4 class="Title">Gestão das Promoções</h4>
+                                </div>
+                                <form [formGroup]="searchForm">
+                                    <div class="Filter">
+                                        <div class="form-group">
+                                            <label>Da data</label>
+                                            <input type="date" class="form-control" formControlName="startDate">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Até a presente data</label>
+                                            <input type="date" class="form-control" formControlName="endDate">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>&nbsp;</label>
+                                            <button class="Button" (click)="search(searchForm.value)">Aplique</button>
+                                            <button class="Button" style="margin-left: 5px;"
+                                                (click)="getViewData()">Redefinir</button>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="HelpArea">
+                                    <ul class="nav nav-tabs boxs" id="myTab" role="tablist">
+                                        <li class="nav-item ">
+                                            <a class="nav-link active" id="payment-tab" data-toggle="tab"
+                                                href="#payment" role="tab" aria-controls="payment"
+                                                aria-selected="true">Pagamento de pedidos </a>
+                                        </li>
+                                        <!-- <li class="nav-item">
+                                            <a class="nav-link" id="received-tab" data-toggle="tab" href="#received"
+                                                role="tab" aria-controls="received" aria-selected="false">Total amount
+                                                received </a>
+                                        </li> -->
+                                    </ul>
+
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="payment" role="tabpanel"
+                                            aria-labelledby="payment-tab">
+                                            <div class="TableList">
+                                                <div class="mainTable ">
+                                                    <table class="table table-striped table-bordered ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S. Nº</th>
+                                                                <th>Número do Pedido</th>
+                                                                <th>Montante</th>
+                                                                <th>Data de criação</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr
+                                                                *ngFor='let x of recordArray | paginate: { itemsPerPage: limit, currentPage: pageNumber , totalItems: total };let i=index'>
+                                                                <td>{{(i+1) + srNumber }}</td>
+                                                                <td>{{x.orderId?.orderNumber}}</td>
+                                                                <td>{{x?.sellerAmount}}</td>
+                                                                <td title="{{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}">
+                                                                    {{x?.createdAt | date:'dd/MM/yyyy h:mm a'}}</td>
+
+                                                            </tr>
+                                                            <tr *ngIf="recordArray == ''">
+                                                                <td colspan="9" vertical-align="middle">
+                                                                    <div class="no-record">
+                                                                        <div class="no-recordin">
+                                                                            <H5 style="margin-left: -5%;">Nenhum Registro Encontrado</H5>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <div *ngIf="recordArray != ''" class="pull-right mt-4">
+                                                        <pagination-controls (pageChange)="pagination($event)">
+                                                        </pagination-controls>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="received" role="tabpanel"
+                                            aria-labelledby="received-tab">
+                                            <div class="TableList">
+                                                <div class="mainTable ">
+                                                    <table class="table table-striped table-bordered ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>S.No</th>
+                                                                <th>Order id </th>
+                                                                <th>Order date </th>
+                                                                <th>Customer name </th>
+                                                                <th>Ph. Number </th>
+                                                                <th>Amount </th>
+                                                                <th>Payment mode </th>
+                                                                <th>Ratings </th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>23421</td>
+                                                                <td>1-1-2020</td>
+                                                                <td>John</td>
+                                                                <td>1234567890</td>
+                                                                <td>34.98 ZAR</td>
+                                                                <td>Online</td>
+                                                                <td>5 star</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>23421</td>
+                                                                <td>1-1-2020</td>
+                                                                <td>John</td>
+                                                                <td>1234567890</td>
+                                                                <td>34.98 ZAR</td>
+                                                                <td>Online</td>
+                                                                <td>5 star</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>23421</td>
+                                                                <td>1-1-2020</td>
+                                                                <td>John</td>
+                                                                <td>1234567890</td>
+                                                                <td>34.98 ZAR</td>
+                                                                <td>Online</td>
+                                                                <td>5 star</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>23421</td>
+                                                                <td>1-1-2020</td>
+                                                                <td>John</td>
+                                                                <td>1234567890</td>
+                                                                <td>34.98 ZAR</td>
+                                                                <td>Online</td>
+                                                                <td>5 star</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="Pagination">
+                                                    <ul>
+                                                        <li><a href="javaScript:void(0)">Previous</a></li>
+                                                        <li class="active"><a href="javaScript:void(0)">1</a></li>
+                                                        <li><a href="javaScript:void(0)">2</a></li>
+                                                        <li><a href="javaScript:void(0)">3</a></li>
+                                                        <li><a href="javaScript:void(0)">Next</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="ModalBox">
+    <div id="DeleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="Decline">
+                        <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                        <h3>Delete</h3>
+                        <p>Are you sure you want to delete ?</p>
+                        <h4>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">no</a>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">Yes</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

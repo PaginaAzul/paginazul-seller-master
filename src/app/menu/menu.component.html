@@ -1,0 +1,391 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="WrapperArea">
+    <div class="WrapperBox">
+        <div class="Small-Wrapper">
+            <div class="enterKey">
+                <h4 class="Title">Gestão do Menu</h4>
+                <div class="SearchBox">
+                    <form action="" [formGroup]="searchForm">
+                        <input type="text" formControlName="search" class="form-control" placeholder="Pesquisa">
+                        <button style="margin-left: 5px;" (click)="search(searchForm.value)">Aplique</button>
+                        <button class="ButtonReset" (click)="getViewData()">Redefinir</button>
+                    </form>
+                </div>
+                <div class="SearchBox">
+                    <a [routerLink]="['/menu-add-item']" style="background-color:#0892d0;
+                    font-size: 13px;">Adicionar itens</a>
+                </div>
+            </div>
+
+            <div class="TableList">
+                <div class="mainTable ">
+                    <table class="table  table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>S. Nº</th>
+                                <th>Imagem</th>
+                                <th>Menu </th>
+                                <th>Tipo</th>
+                                <th>Nome</th>
+                                <th>Preço</th>
+                                <th>Status da Promoção</th>
+                                <th>Validade da Promoção</th>
+                                <th>Preço de Promoção </th>
+                                <th>Descrição </th>
+                                <th>Status</th>
+                                <th>Açao </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr
+                                *ngFor='let x of recordArray | paginate: { itemsPerPage: limit, currentPage: pageNumber , totalItems: total };let i=index'>
+                                <td>{{(i+1) + srNumber }}</td>
+                                <td><img src="{{x?.productImage}}" alt="" class="imgWidth"></td>
+                                <td>{{x?.cuisine}}</td>
+
+                                <td>{{x?.productType}}</td>
+                                <td>{{x?.productName}}</td>
+                                <td>{{x?.price}} Kz</td>
+                                <td *ngIf="x?.oStatus=='Active'">
+                                    <a class="Green" data-toggle="modal" data-target="#toggles" (click)="toggles(x)"
+                                        title="Click"><i class="fa fa-check"
+                                            style="color:green;cursor: pointer;"></i></a>
+                                </td>
+                                <td *ngIf="x?.oStatus=='Inactive'">
+                                    <a data-toggle="modal" data-target="#toggles" (click)="toggles(x)"
+                                    title="Click"><i class="fa fa-ban"
+                                            style="color:red;cursor: pointer;"></i></a>
+                                </td>
+                                <td title="{{x?.offerEndDate | date:'dd/MM/yyyy h:mm a'}}">
+                                    {{x?.endDate | date:'dd/MM/yyyy h:mm a'}}</td>
+                                <td>{{x?.offerPrice}} Kz</td>
+                                <td>{{x?.description}}</td>
+                                <td *ngIf="x?.status=='Active'" style="color:green" title="Active">Active</td>
+                                <td *ngIf="x?.status=='Inactive'" style="color:red" title="Inactive">Inactive</td>
+                                <td *ngIf="x?.status!='Active' && x?.status!='Inactive'"></td>
+
+                                <td>
+                                    <a class="Green" (click)="toggless(x)" data-toggle="modal"
+                                        data-target="#toggless"><i class="fa fa-pencil"></i></a>
+                                    <a class="Red" href="JavaScript:Void(0);" (click)="DeleteModal(x?._id)"
+                                        data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash"></i></a>
+                                    <a class="Red" style="color:white" (click)="blockApi('Inactive',x?._id)"
+                                        *ngIf="x?.status=='Active'" data-target="modal" title="Inactive"><i
+                                            class="fa fa-ban" style="color: red;cursor: pointer;"></i></a>
+                                    <a class="Green" (click)="blockApi('Active',x?._id)" *ngIf="x?.status=='Inactive'"
+                                        data-target="modal" title="Active"><i class="fa fa-check"
+                                            style="color: green;cursor: pointer;"></i></a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="recordArray == ''">
+                                <td colspan="12" vertical-align="middle">
+                                    <div class="no-record">
+                                        <div class="no-recordin">
+                                            <H5 style="margin-left: 1%;">Nenhum Registro Encontrado</H5>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   
+                </div>
+                <div *ngIf="recordArray != ''" class="pull-right mt-4">
+                    <pagination-controls (pageChange)="pagination($event)"></pagination-controls>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div id="DeleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="Decline">
+                        <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                        <h3>Excluir</h3>
+                        <p>Tem certeza de que deseja excluir ?</p>
+                        <h4>
+                            <a href="JavaScript:Void(0);" data-dismiss="modal">não</a>
+                            <a href="JavaScript:Void(0);" (click)="deleteApi()" data-dismiss="modal">sim</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="ModalBox">
+    <div id="toggles" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal">&times;</a>
+                    <div class="PasswordArea">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form [formGroup]="addOfferForm">
+                                    <div class="form-group">
+                                        <label>Data de início</label>
+                                        <input type="date" class="form-control" formControlName="startDate">
+                                        <div class="text-danger"
+                                            *ngIf="addOfferForm.get('startDate').hasError('required') && (formvalidation.submitted || addOfferForm.get('startDate').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Data final</label>
+                                        <input type="date" class="form-control" formControlName="endDate">
+                                        <div class="text-danger"
+                                            *ngIf="addOfferForm.get('endDate').hasError('required') && (formvalidation.submitted || addOfferForm.get('endDate').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control" formControlName="offerStatus">
+                                            <option value="">Status</option>
+                                            <option *ngFor="let y of statusData" value="{{y}}">
+                                                {{y}}
+                                            </option>
+                                        </select>
+                                        <div class="text-danger"
+                                            *ngIf="addOfferForm.get('offerStatus').hasError('required') && (formvalidation.submitted || addOfferForm.get('offerStatus').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Categoria</label>
+                                        <select class="form-control" (change)="changeCategory($event)" formControlName="storeId">
+                                            <option value="">Categoria</option>
+                                            <option *ngFor="let y of storeList" value="{{y._id}}">
+                                                {{y.name}}
+                                            </option>
+                                        </select>
+                                        <div class="text-danger"
+                                            *ngIf="addOfferForm.get('storeId').hasError('required') && (formvalidation.submitted || addOfferForm.get('storeId').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Subcategoria</label>
+                                        <select class="form-control"  formControlName="storeCategoryId">
+                                            <option value="">Subcategoria</option>
+                                            <option *ngFor="let y of categoryList" value="{{y._id}}">
+                                                {{y.name}}
+                                            </option>
+                                        </select>
+                                        <div class="text-danger"
+                                            *ngIf="addOfferForm.get('storeCategoryId').hasError('required') && (formvalidation.submitted || addOfferForm.get('storeCategoryId').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Preço com desconto</label>
+                                        <input type="text" name="" class="form-control" placeholder="Preço com desconto"
+                                            formControlName="offerPrice">
+                                        <div class="text-danger"
+                                            *ngIf="addOfferForm.get('offerPrice').hasError('required') && (formvalidation.submitted || addOfferForm.get('offerPrice').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                        <div class="text-danger"
+                                            *ngIf="addOfferForm.get('offerPrice').hasError('pattern') && (formvalidation.submitted || addOfferForm.get('offerPrice').dirty)">
+                                            *Somente número
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Quantidade</label>
+                                        <input type="text" name="" class="form-control" placeholder="Quantidade"
+                                            formControlName="offerQuantity">
+                                        <div class="text-danger"
+                                            *ngIf="addOfferForm.get('offerQuantity').hasError('required') && (formvalidation.submitted || addOfferForm.get('offerQuantity').dirty)">
+                                            *Campo é obrigatório
+                                        </div>
+                                        <div class="text-danger"
+                                            *ngIf="addOfferForm.get('offerQuantity').hasError('pattern') && (formvalidation.submitted || addOfferForm.get('offerQuantity').dirty)">
+                                            *Somente número
+                                        </div>
+                                    </div>
+                                    <button type="submit" (click)="addOffer(addOfferForm.value)"
+                                        class="Button apply_btn">Confirme</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div id="toggless" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <a href="JavaScript:Void(0);" class="CloseModal" data-dismiss="modal" (click)="cancelModal()">&times;</a>
+                    <div class="PasswordArea">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form [formGroup]="editMenuForm">
+                                    <div class="">
+                                        <div class="holdrpc">
+
+                                        </div>
+                                        <div class="card-block dashmainbusin">
+                                            <div>
+                                                <img src="{{activeImage}}" *ngIf="activeImage" style="height: 70px;
+                                                width: 79px;
+                                                margin-left: 133px;">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Imagem do item</label>
+                                                <input #fileUploader type="file" id=fileUploader
+                                                    (change)="selectImages($event)">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Nome do item</label>
+                                                <input type="text" id="text-input" name="en_name"
+                                                    placeholder="Nome do item" class="form-control"
+                                                    formControlName="productName">
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('productName').hasError('required') && (formvalidation.submitted || editMenuForm.get('productName').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Selecione veg / não veg</label>
+                                                <select class="form-control" formControlName="productType">
+                                                    <option value="">Selecione a Categoria</option>
+                                                    <option *ngFor="let y of categoryData" value="{{y}}">
+                                                        {{y}}
+                                                    </option>
+                                                </select>
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('productType').hasError('required') && (formvalidation.submitted || editMenuForm.get('productType').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label>Tipo de sabor (salgado / doce / misto)</label>
+                                                <input type="text" id="text-input" name="en_name"
+                                                    placeholder="Enter Taste Type" class="form-control"
+                                                    formControlName="tasteType">
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('tasteType').hasError('required') && (formvalidation.submitted || editMenuForm.get('tasteType').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Tipo de alimentação (café da manhã / almoço / jantar)</label>
+                                                <input type="text" id="text-input" name="en_name"
+                                                    placeholder="Enter Eat Type" class="form-control"
+                                                    formControlName="eatType">
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('eatType').hasError('required') && (formvalidation.submitted || editMenuForm.get('eatType').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label>Quantidade</label>
+                                                <input type="text" id="text-input" name="en_name"
+                                                    placeholder="Quantidade" class="form-control"
+                                                    formControlName="quantity">
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('quantity').hasError('required') && (formvalidation.submitted || editMenuForm.get('quantity').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('quantity').hasError('pattern') && (formvalidation.submitted || editMenuForm.get('quantity').dirty)">
+                                                    *Somente número
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Medição</label>
+                                                <input type="text" id="text-input" name="en_name"
+                                                    placeholder="Medição" class="form-control"
+                                                    formControlName="measurement">
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('measurement').hasError('required') && (formvalidation.submitted || editMenuForm.get('measurement').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Descrição</label>
+                                                <input type="text" id="text-input" name="en_name"
+                                                    placeholder="Descrição" class="form-control"
+                                                    formControlName="description">
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('description').hasError('required') && (formvalidation.submitted || editMenuForm.get('description').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label>Preço do item</label>
+                                                <input type="text" name="price" placeholder="Preço do item"
+                                                    class="form-control" formControlName="price">
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('price').hasError('required') && (formvalidation.submitted || editMenuForm.get('price').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('price').hasError('pattern') && (formvalidation.submitted || editMenuForm.get('price').dirty)">
+                                                    *Somente número
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label>Cozinha</label>
+                                                <select class="form-control" formControlName="cuisine">
+                                                    <option value="">Cozinha</option>
+                                                    <option *ngFor="let y of cuisines" value="{{y}}">
+                                                        {{y}}
+                                                    </option>
+                                                </select>
+                                                <div class="text-danger"
+                                                    *ngIf="editMenuForm.get('cuisine').hasError('required') && (formvalidation.submitted || editMenuForm.get('cuisine').dirty)">
+                                                    *Campo é obrigatório
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bdr-bts">
+                                        <button type="button" class="btn btn-primary btn-sm" (click)="editItem()"
+                                            style="cursor: pointer;">
+                                            <i class="fa fa-dot-circle-o"></i> Enviar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
